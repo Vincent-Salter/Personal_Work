@@ -47,3 +47,5 @@ class Bank_accounts:
 
 # Question for mother about init(self) being the only needed parameter and we can just have self in the body of the method
 transfer_money = float(input("Transfer funds: "))
+
+viinny = Bank_accounts()
