@@ -1,16 +1,14 @@
 import yfinance as yf
 from datetime import datetime, timedelta
-from stockmethods import trading_bot_methods
+from stockmethods_clone import trading_bot_methods
 
 # Copyright Vincent Salter 02/12/23 2nd of December 2023
 
 class StockAlgorithm:
 
     def __init__(self, drawdown_percent, day_range):
-        self.drawdown_percent = drawdown_percent
-        self.day_range = day_range
-        self.start_date = (datetime.now() - timedelta(days=365)).strftime('%Y-%m-%d')
-        self.end_date = datetime.now().strftime('%Y-%m-%d')
+        pass
+        ## Constructor code available upon request
 
     def fetch_stock_data(self, stock_symbol, start_date, end_date):
         stock_data = yf.download(stock_symbol, start=start_date, end=end_date)
@@ -33,37 +31,14 @@ class StockAlgorithm:
     #can i add here a method that would add a list to the object if you wanted to pull multiple tickers add them to a list then process them all
 
     def process_stock(self, ticker):
-        stock_data = self.fetch_stock_data(ticker, self.start_date, self.end_date) #self.add_list() insert something like that here maybe when fetching data
-        if stock_data.empty:
-            print("No data fetched. Check your stock symbol and date range.")
-        else:
-            trades = trading_bot_methods.backtest_strategy(stock_data, self.drawdown_percent, self.day_range)
-            if not trades:
-                print("No qualifying trades found.")
-            else:
-                total_profit = sum(trade[4] for trade in trades)
-                print(f"Total number of trades: {len(trades)}")
-                print(f"Total profit: {total_profit}")
-                while True:
-                    plot_y_n = input("Would you like to plot the data? Please enter yes or no: ")
-                    if plot_y_n.lower() == "yes":
-                        trading_bot_methods.plot_trades(stock_data, trades)
-                        break
-                    elif plot_y_n.lower() == "no":
-                        break
-                    else:
-                        print("Incorrect input please try again.")
-                
-                filename = f"{ticker}_{self.drawdown_percent}%_{self.day_range}.csv"
-                directory = input(r"Enter directory here: ")
-                trading_bot_methods.export_trades_to_csv(trades, directory, filename)
+                # Main method code available upon request
                 print(f"File saved to directory: {directory}")#how do i print a new line above here
 
 print("Please input your parameters here.\n")
 initial_drawdown_percent = float(input("Enter drawdown percent (e.g., 5 for 5%) here: "))
 initial_day_range = int(input("How many days until you would like to sell?: "))
 
-#stock_algo is the self, the self. is just changing the propreys or attributes of the object
+#stock_algo is the self, the self. is just changing the properties or attributes of the object
 stock_algo = StockAlgorithm(initial_drawdown_percent, initial_day_range) #how is this row here assigned\\\\ creating an instance of the class to use it in the program
 print("If you would like to change your parameters please type 'change' or type 'done' to finish.\n")
 

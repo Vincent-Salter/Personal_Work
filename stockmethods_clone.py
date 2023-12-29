@@ -44,18 +44,8 @@ class trading_bot_methods():
 
     def backtest_strategy(stock_data, drawdown_percent, day_range):
         trades = []
-        for index, row in stock_data.iterrows():
-            open_price = row['Open']
-            low_price = row['Low']
-            if low_price <= open_price * (1 - drawdown_percent / 100):
-                buy_price = low_price
-                sell_date = index + timedelta(days=day_range)
-                if sell_date in stock_data.index:
-                    sell_price = stock_data.loc[sell_date]['Close']
-                    profit = sell_price - buy_price
-                    trades.append((index, buy_price, sell_date, sell_price, profit))
-                else:
-                    print(f"Target sell date is out of range for the data: {sell_date}")
+
+        ## Strategy available upon request
         
         # This return statement should be outside the for loop
         return trades
